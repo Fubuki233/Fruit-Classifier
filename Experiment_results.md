@@ -13,7 +13,7 @@ This document records the setup and results of all experiments conducted within 
 ## 1. Experiment Summary
 
 | Exp ID | Notebook / Script | Model Settings Description | Data augmentation | Dropout | Train Acc | Val Acc | Test Acc | Loss |
-| E1     |                   |                            |                   |         |           |         |          |      |
+| E1     |                   |                            | No data augmentation        |         |           |         |          |      |
 | E2     |                   |                            |                   |         |           |         |          |      |
 | ...    |                   |                            |                   |         |           |         |          |      |
 
