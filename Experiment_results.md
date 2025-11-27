@@ -1,0 +1,29 @@
+# Experiment Results - Fruit Classifier
+
+This document records the setup and results of all experiments conducted within this project, serving as a basis for subsequent CA report writing and for comparing the performance of different models.
+---
+
+## 0. Common Settings 
+- Dataset: Fruits (Apple / Banana / Orange / Mixed)
+- Train folder: 'data/train'
+- Test folder: 'data/test'
+- Framework: 
+- Image size:
+
+## 1. Experiment Summary
+
+| Exp ID | Notebook / Script | Model Settings Description | Data augmentation | Dropout | Train Acc | Val Acc | Test Acc | Loss |
+| E1     |                   |                            |                   |         |           |         |          |      |
+| E2     |                   |                            |                   |         |           |         |          |      |
+| ...    |                   |                            |                   |         |           |         |          |      |
+
+
+
+## 2. Experiment Details
+
+### E1 - Baseline CNN
+...
+...
+...
+### E2 – ...
+
