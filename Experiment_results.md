@@ -12,17 +12,13 @@ This document records the setup and results of all experiments conducted within 
 
 ## 1. Experiment Summary
 
-| Exp ID | Notebook / Script | Model Settings Description |         Data augmentation         |       Dropout        | Train Acc | Val Acc | Test Acc | Loss |
-| E1                                                              No data augmentation 
-| E2                                                                    Rotation   
-| E3                                                                  
-| ...    
-| ...    
-| ...    
-| ...    
-| ...    
-| ...    
-| ...    
+| Exp ID | Notebook / Script     | Model Settings Description         | Data augmentation | Dropout | Train Acc | Val Acc | Test Acc | Notes |
+|-------|------------------------|------------------------------------|-------------------|---------|-----------|---------|----------|-------|
+| E1    | 01_baseline.ipynb      | Baseline CNN                       | None              | 0.0     |           |         |          | E1: No data augmentation |
+| E2    | 02_aug_rotation.ipynb  | Baseline + more filters            | Rotation          | 0.0     |           |         |          | E2: Rotation only        |
+| E3    | 03_aug_dropout.ipynb   | Baseline + Aug + Dropout(0.5)      | Flip + Rotation   | 0.5     |           |         |          | E3: Aug + Dropout        |
+| ...   | ...                    | ...                                | ...               | ...     |           |         |          | ...   |
+
 
 ## 2. Experiment Details
 
