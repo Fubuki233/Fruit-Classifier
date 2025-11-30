@@ -52,10 +52,10 @@ Saves preprocessed samples to `data/preprocess/` for visual comparison.
 
 | Exp ID | Script File                  | Model Description                  | Augmentation                      | Regularization      | Train Acc | Val Acc | Test Acc | Notes |
 |--------|------------------------------|------------------------------------|-----------------------------------|---------------------|-----------|---------|----------|-------|
-| E1     | E1_baseline.py               | Basic CNN (3 Conv layers)          | None                              | None                |           |         |          | Baseline without augmentation |
-| E2     | E2_augmentation_light.py     | Basic CNN                          | Rotation + Flip                   | None                |           |         |          | Light augmentation |
-| E3     | E3_augmentation_heavy.py     | Basic CNN                          | Rotation + Shift + Zoom + Brightness | None           |           |         |          | Heavy augmentation |
-| E4     | E4_batchnorm_dropout.py      | CNN + BatchNorm                    | Rotation + Shift + Zoom + Flip    | Dropout (0.25-0.5)  |           |         |          | BatchNorm + Dropout |
-| E5     | E5_transfer_mobilenet.py     | MobileNetV2 Transfer Learning      | Rotation + Shift + Zoom + Flip    | Dropout (0.5)       |           |         |          | Pretrained model |
-| E6     | E6_smaller_image.py          | Lightweight CNN (128x128)          | Rotation + Shift + Zoom + Flip    | Dropout (0.2-0.4)   |           |         |          | Smaller image size |
+| E1     | [E1_baseline.py](E1_baseline.py)               | Basic CNN (3 Conv layers)          | None                              | None                |           |         |          | Baseline without augmentation |
+| E2     | [E2_augmentation_light.py](E2_augmentation_light.py)     | Basic CNN                          | Rotation + Flip                   | None                |           |         |          | Light augmentation |
+| E3     | [E3_augmentation_heavy.py](E3_augmentation_heavy.py)     | Basic CNN                          | Rotation + Shift + Zoom + Brightness | None           |           |         |          | Heavy augmentation |
+| E4     | [E4_batchnorm_dropout.py](E4_batchnorm_dropout.py)      | CNN + BatchNorm                    | Rotation + Shift + Zoom + Flip    | Dropout (0.25-0.5)  |           |         |          | BatchNorm + Dropout |
+| E5     | [E5_transfer_mobilenet.py](E5_transfer_mobilenet.py)     | MobileNetV2 Transfer Learning      | Rotation + Shift + Zoom + Flip    | Dropout (0.5)       |           |         |          | Pretrained model |
+| E6     | [E6_smaller_image.py](E6_smaller_image.py)          | Lightweight CNN (128x128)          | Rotation + Shift + Zoom + Flip    | Dropout (0.2-0.4)   |           |         |          | Smaller image size |
 
