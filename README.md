@@ -29,6 +29,35 @@ The data `train.zip` and `test.zip` are found under the **Files/Team Project** m
 
 ---
 
+## Remote GPU Server Setup 
+
+**Speed Up Training with GPU Support** MacBooks/slims don't have NVIDIA GPUs for deep learning. Connect to a remote GPU server for **significantly faster training**.
+
+### Quick Setup
+0. **Sync Data to Remote Server(if needed)**
+1. run:
+   ```
+   pip install paramiko scp tqdm
+   python pic_sync.py
+   ```
+2. **Open CNN.ipynb in VS Code**
+
+3. **Select Remote Kernel**:
+   - Click kernel selector (top-right)
+   - Select "Existing Jupyter Server"
+   - Enter URL: `http://ctrl.zyh111.icu:8011/`
+   - Enter password: `123456`
+   - Select the `TensorFlow` kernel
+4. **Verify GPU Access**:
+   ```python
+   import tensorflow as tf
+   print(tf.config.list_physical_devices('GPU'))
+   ```
+
+5. **Start Training** - Your model will now train on GPU!
+
+---
+
 # CA Rubics
 
 | CRITERIA | DESCRIPTION | POINTS |
