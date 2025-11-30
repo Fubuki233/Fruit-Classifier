@@ -35,26 +35,26 @@ The data `train.zip` and `test.zip` are found under the **Files/Team Project** m
 
 ### Quick Setup
 0. **Sync Data to Remote Server(if needed)**
-1. run:
+   run:
    ```
    pip install paramiko scp tqdm
    python pic_sync.py
    ```
-2. **Open CNN.ipynb in VS Code**
+1. **Open CNN.ipynb in VS Code**
 
-3. **Select Remote Kernel**:
+2. **Select Remote Kernel**:
    - Click kernel selector (top-right)
    - Select "Existing Jupyter Server"
    - Enter URL: `http://ctrl.zyh111.icu:8011/`
    - Enter password: `123456`
    - Select the `TensorFlow` kernel
-4. **Verify GPU Access**:
+3. **Verify GPU Access**:
    ```python
    import tensorflow as tf
    print(tf.config.list_physical_devices('GPU'))
    ```
 
-5. **Start Training** - Your model will now train on GPU!
+4. **Start Training** - The model will now train on GPU!
 
 ---
 
