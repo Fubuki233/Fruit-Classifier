@@ -34,7 +34,7 @@ The data `train.zip` and `test.zip` are found under the **Files/Team Project** m
 **Speed Up Training with GPU Support** MacBooks/slims don't have NVIDIA GPUs for deep learning. Connect to a remote GPU server for **significantly faster training**.
 
 ### Quick Setup
-0. **Sync Data to Remote Server(if needed)**
+0. **Sync Data to Remote Server(if needed (only when dataset changed(I've already uploaded the default dataset, U don't need to do this step)))**
    run:
    ```
    pip install paramiko scp tqdm
@@ -49,10 +49,18 @@ The data `train.zip` and `test.zip` are found under the **Files/Team Project** m
    - Enter password: `123456`
    - Select the `TensorFlow` kernel
 3. **Verify GPU Access**:
-   ```python
-   import tensorflow as tf
-   print(tf.config.list_physical_devices('GPU'))
+   Run no. 0 cell in `CNN.ipynb` , you should see :
    ```
+   ============================================================
+   TensorFlow version: 2.20.0
+   Keras version: 3.12.0
+
+   GPU Status: 1 GPU(s) available
+   GPU 0: /physical_device:GPU:0
+   Device Name: NVIDIA GeForce RTX 3080
+   ============================================================
+   ```
+
 
 4. **Start Training** - The model will now train on GPU!
 
