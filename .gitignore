@@ -43,8 +43,6 @@ venv.bak/
 *.pt
 *.pkl
 *.model
-data/
-datasets/
 
 # MacOS junk
 .DS_Store
