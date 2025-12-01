@@ -14,27 +14,9 @@ This document records the setup and results of all experiments conducted within 
 
 ### Data Preprocessing Module Usage
 
-All experiments use the unified `data_preprocessing.py` module:
+**Preprocessing in CNN.ipynb:**
 
 ```python
-from data_preprocessing import get_preprocessor, load_from_directory
-
-# Check dataset information
-train_info = load_from_directory('data/train')
-print(f"Total images: {train_info['total']}")
-print(f"Classes: {train_info['classes']}")
-
-# Get preprocessed data generators
-train_gen, val_gen, test_gen = get_preprocessor(
-    method='moderate',    # baseline, light, moderate, heavy, minimal
-    img_size=224,
-    batch_size=32
-)
-
-# Use in training
-X_batch, y_batch = next(train_gen)
-```
-
 **Available Methods:**
 - `baseline` - Only rescaling (1./255)
 - `light` - Rotation (15°) + Horizontal flip
