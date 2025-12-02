@@ -95,6 +95,7 @@ def get_preprocessor(method='baseline', img_size=224, batch_size=32, train_dir='
             zoom_range=0.1,
             validation_split=val_split
         )
+
         
     else:
         raise ValueError(f"Unknown method: {method}. Choose from: baseline, light, heavy, moderate, minimal")
@@ -134,7 +135,8 @@ def list_methods():
         'light': 'Rotation (15°) + Horizontal flip',
         'heavy': 'Full augmentation (rotation, shift, zoom, shear, brightness, flips)',
         'moderate': 'Balanced augmentation (rotation, shift, zoom, flip)',
-        'minimal': 'Minimal augmentation (slight rotation, zoom)'
+        'minimal': 'Minimal augmentation (slight rotation, zoom)',
+        'mixed': 'Intensive mix: strong geo + brightness [0.5–1.5] + channel shift'
     }
     print("Available preprocessing methods:")
     for key, desc in methods.items():
@@ -150,7 +152,7 @@ if __name__ == "__main__":
     output_dir = 'data/preprocess'
     os.makedirs(output_dir, exist_ok=True)
     
-    methods = ['baseline', 'light', 'moderate', 'heavy', 'minimal']
+    methods = ['baseline', 'light', 'moderate', 'heavy', 'minimal', 'mixed']
     samples_per_method = 5
     
     for method in methods:
@@ -176,5 +178,3 @@ if __name__ == "__main__":
         print(f"  Saved {samples_per_method} samples to {method_dir}")
     
     print("\n" + "="*60)
-
-
