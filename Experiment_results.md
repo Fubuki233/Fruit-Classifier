@@ -23,6 +23,7 @@ This document records the setup and results of all experiments conducted within 
 - `moderate` - Rotation (20°) + Shift + Zoom + Flip
 - `heavy` - Full augmentation (rotation, shift, zoom, shear, brightness, flips)
 - `minimal` - Minimal augmentation (rotation 10°, zoom 0.1)
+- `color_boost` - moderate geometry + brightness [0.7-1.3] + channel shift
 
 **Generate Sample Images:**
 ```bash
@@ -40,4 +41,4 @@ Saves preprocessed samples to `data/preprocess/` for visual comparison.
 | E4     | [E4_batchnorm_dropout.py](E4_batchnorm_dropout.py)      | CNN + BatchNorm                    | Rotation + Shift + Zoom + Flip    | Dropout (0.25-0.5)  |           |         |          | BatchNorm + Dropout |
 | E5     | [E5_transfer_mobilenet.py](E5_transfer_mobilenet.py)     | MobileNetV2 Transfer Learning      | Rotation + Shift + Zoom + Flip    | Dropout (0.5)       |           |         |          | Pretrained model |
 | E6     | [E6_smaller_image.py](E6_smaller_image.py)          | Lightweight CNN (128x128)          | Rotation + Shift + Zoom + Flip    | Dropout (0.2-0.4)   |           |         |          | Smaller image size |
-
+| E9     | [E9_color_boost.py](E9_color_boost.py)     | Basic CNN (3 Conv layers)      | Moderate geo + brightness [0.7-1.3] + channel shift    | Dropout (0.2/0.2)       |      Corresponding Training Accuracy: 0.9223     |   Test Accuracy: 88.33%   |   
