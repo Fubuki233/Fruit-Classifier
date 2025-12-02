@@ -9,7 +9,7 @@ train_gen, val_gen, test_gen = get_preprocessor(
     batch_size=BATCH_SIZE
 )
 
-print("E7 - Color boost augmentation preprocessing completed")
+print("E9 - Color boost augmentation preprocessing completed")
 print(f"Training samples: {train_gen.samples}")
 print(f"Validation samples: {val_gen.samples}")
 print(f"Test samples: {test_gen.samples}")
