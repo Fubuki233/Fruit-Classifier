@@ -68,7 +68,7 @@ The data `train.zip` and `test.zip` are found under the **Files/Team Project** m
 
 # CA Rubics
 
-| CRITERIA | DESCRIPTION | POINTS |
+| CRITERIA | DESCRIPTION | POINTS |     
 |----------|-------------|---------|
 | Model Accuracy | Try to train your model to obtain **at least 92% accuracy** on the test data. | **5** |
 | Model Training Experiments | Experiments done to achieve better model accuracy (e.g. pre-processing, different network architectures) | **15** |
