@@ -41,4 +41,9 @@ Saves preprocessed samples to `data/preprocess/` for visual comparison.
 | E4     | [E4_batchnorm_dropout.py](E4_batchnorm_dropout.py)      | CNN + BatchNorm                    | Rotation + Shift + Zoom + Flip    | Dropout (0.25-0.5)  |           |         |          | BatchNorm + Dropout |
 | E5     | [E5_transfer_mobilenet.py](E5_transfer_mobilenet.py)     | MobileNetV2 Transfer Learning      | Rotation + Shift + Zoom + Flip    | Dropout (0.5)       |           |         |          | Pretrained model |
 | E6     | [E6_smaller_image.py](E6_smaller_image.py)          | Lightweight CNN (128x128)          | Rotation + Shift + Zoom + Flip    | Dropout (0.2-0.4)   |           |         |          | Smaller image size |
+<<<<<<< Updated upstream
 | E9     | [E9_color_boost.py](E9_color_boost.py)     | Basic CNN (3 Conv layers)      | Moderate geo + brightness [0.7-1.3] + channel shift    | Dropout (0.2/0.2)       |      Corresponding Training Accuracy: 0.9223     |   Test Accuracy: 88.33%   |   
+=======
+| E7      | [E7_deeper_cnn.py](E7_deeper_cnn.py) | Deeper CNN (5 Conv layers)                         | Rotation + Shift + Zoom + Flip         | None                |           |         |          | Increased Depth (Testing model capacity)|
+| E8     | [E8_augmentation_heavy_dropout.py](E8_augmentation_heavy_dropout.py) | Basic CNN                          | Rotation + Shift + Zoom + Flip    | Dropout (0.5)       |           |         |          | Heavy augmentation + Dropout |
+>>>>>>> Stashed changes
