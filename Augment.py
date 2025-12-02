@@ -8,9 +8,9 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: igno
 import random
 
 # Source train data paths
-train_dir = 'C:/Users/Jiang/Documents/VSCode/Fruit-Classifier/data/train'
+train_dir = 'C:/Users/Jiang/Documents/GitHub/Fruit-Classifier/data/train'
 # Augmented data paths
-augmented_train_dir = 'C:/Users/Jiang/Documents/VSCode/Fruit-Classifier/data/train_augmented'
+augmented_train_dir = 'C:/Users/Jiang/Documents/GitHub/Fruit-Classifier/data/train_augment'
 
 def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224)):
     """
@@ -158,4 +158,4 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
                         if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp'))])
             print(f"  {class_name}: {count} images")
 
-augment_dataset(train_dir, augmented_train_dir, target_count=100)
+augment_dataset(train_dir, augmented_train_dir, target_count=80)
