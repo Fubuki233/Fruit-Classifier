@@ -8,9 +8,9 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: igno
 import random
 
 # Source train data paths
-train_dir = 'Fruit-Classifier/data/train'
+train_dir = './data/train'
 # Augmented data paths
-augmented_train_dir = 'Fruit-Classifier/data/train_augment'
+augmented_train_dir = './data/train_augment'
 
 def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224)):
     """
@@ -64,6 +64,11 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
         print(f"\nProcessing class: {class_name}")
         print(f"  Original image count: {len(image_files)}")
         
+        # Skip if no images found
+        if len(image_files) == 0:
+            print(f"  Warning: No images found in {class_name}, skipping...")
+            continue
+        
         # Copy original images to target directory (and unify size)
         copied_count = 0
         for img_file in image_files:
@@ -86,11 +91,20 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
             original_images = []
             for img_file in image_files:
                 img_path = os.path.join(class_source_dir, img_file)
-                img = Image.open(img_path)
-                img = img.convert('RGB')  # Ensure RGB format
-                img = img.resize(img_size)  # Unify size
-                img_array = np.array(img)
-                original_images.append(img_array)
+                try:
+                    img = Image.open(img_path)
+                    img = img.convert('RGB')
+                    img = img.resize(img_size)
+                    img_array = np.array(img)
+                    original_images.append(img_array)
+                except Exception as e:
+                    print(f"    Warning: Failed to load {img_file}: {e}")
+                    continue
+            
+            # Check if any images were successfully loaded
+            if len(original_images) == 0:
+                print(f"  Error: No valid images found for augmentation, skipping...")
+                continue
             
             # Convert image list to numpy array
             original_images_array = np.array(original_images)
