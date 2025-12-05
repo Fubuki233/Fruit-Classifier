@@ -26,7 +26,7 @@ REMOTE_USER = "zyh"
 REMOTE_PASSWORD = "1"
 REMOTE_PATH = "/home/zyh/Fruit-Classifier"
 
-LOCAL_DATA = Path("data")
+LOCAL_DATA = Path("data/train_augment")
 ZIP_NAME = "data_upload.zip"
 CHUNK_SIZE = 10 * 1024 * 1024  # 10MB per chunk for parallel upload
 MAX_WORKERS = 4  # Number of parallel upload threads

@@ -8,9 +8,9 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: igno
 import random
 
 # Source train data paths
-train_dir = 'C:/Users/Jiang/Documents/GitHub/Fruit-Classifier/data/train'
+train_dir = 'Fruit-Classifier/data/train'
 # Augmented data paths
-augmented_train_dir = 'C:/Users/Jiang/Documents/GitHub/Fruit-Classifier/data/train_augment'
+augmented_train_dir = 'Fruit-Classifier/data/train_augment'
 
 def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224)):
     """
@@ -32,16 +32,13 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
     
     # Define data augmentation generator
     datagen = ImageDataGenerator(
-        rotation_range=40,
-        width_shift_range=0.2,
-        height_shift_range=0.2,
-        shear_range=0.2,
-        zoom_range=0.2,
-        horizontal_flip=True,
-        vertical_flip=True,
-        brightness_range=[0.5, 1.5],
-        fill_mode='nearest'
-    )
+            rotation_range=20,
+            width_shift_range=0.2,
+            height_shift_range=0.2,
+            zoom_range=0.2,
+            horizontal_flip=True,
+            fill_mode='nearest' 
+        )
     
     # Get all classes
     class_names = os.listdir(source_dir)
@@ -133,7 +130,9 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
                         break
                         
                     # Convert back to image and save
-                    aug_img = Image.fromarray(batch_images[i].astype('uint8'))
+                    # 确保像素值在 0-255 范围内
+                    aug_img_array = np.clip(batch_images[i], 0, 255).astype('uint8')
+                    aug_img = Image.fromarray(aug_img_array)
                     aug_filename = f"aug_{class_name}_{generated_count:04d}.jpg"
                     aug_path = os.path.join(class_target_dir, aug_filename)
                     aug_img.save(aug_path)
