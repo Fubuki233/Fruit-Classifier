@@ -33,15 +33,15 @@ Saves preprocessed samples to `data/preprocess/` for visual comparison.
 
 ## 1. Experiment Summary
 
-| Exp ID | Script File          | Model Description         | Geometry(Shift/Zoom/Shear)                                       | Color/Brightness   | Train Acc | Val Acc | Test Acc | Notes |
-|--------|----------------------|---------------------------|------------------------------------------------------------------|--------------------|-----------|---------|----------|-------|
-| E1     | Baseline             | Rotation:None Flips:None  | None                                                             | None               |          | Baseline without augmentation |
-| E2     | Minimal              | Rotation:10° Flips:None   | Rotation + Flip                                                  | None               |           |         |     Test Accuracy: 90.00%     | Light augmentation |
-| E3     | Light                | Rotation:15° Flips:H      | Rotation + Shift + Zoom + Brightness                             | None               |           |         |          | Heavy augmentation | Test Accuracy: 91.67%
-| E4     | Moderate             | Rotation:20° Flips:H      | Rotation + Shift + Zoom + Flip                                   | Dropout (0.25-0.5) |           |         |          | BatchNorm + Dropout |
-| E5     | Heavy(Original)      | Rotation:30° Flips:H&V    | Rotation + Shift + Zoom + Flip                                   | Dropout (0.5)      |           |         |          | Pretrained model |
-| E6     | Heavy1               | Rotation:45° Flips:H      | Rotation + Shift + Zoom + Flip                                   | Dropout (0.2-0.4)  |           |         |          | Smaller image size |
-| E7     | Heavy2(Special)      | Rotation:45° Flips:H      | Rotation + Shift + Zoom + Flip                                   | None               |           |         |          | Increased Depth (Testing model capacity)|
-| E8     | Heavy3(Heavy1+Heavy) | Rotation:20               | Rotation + Shift + Zoom + Flip                                   | Dropout (0.5)      |           |         |          | Heavy augmentation + Dropout |
-| E9     | Color_Boost          | Basic CNN (3 Conv layers) | Moderate geo + brightness [0.7-1.3] + channel shift              | Dropout (0.2/0.2)  |           |  Test Accuracy: %    |   
-| E10    | Mixed                | Basic CNN (3 Conv layers) | Intensive mix: strong geo + brightness [0.5-1.5] + channel shift | Dropout (0.2/0.2)  |        |         |          |  Test Accuracy: % |
+| Exp ID | Script File          | Model Description        | Geometry(Shift/Zoom/Shear)      | Color/Brightness                         | Val Acc | Training Acc | Notes                                    |
+|--------|----------------------|--------------------------|---------------------------------|------------------------------------------|---------|--------------|------------------------------------------|
+| E1     | Baseline             | Rotation:None Flips:None | None                            | None                                     | 0.8281  | 0.7617       |                                          |
+| E2     | Minimal              | Rotation:10° Flips:None  | Zoom:0.1                        | None                                     | 0.9062  | 0.9258       | Light augmentation                       |
+| E3     | Light                | Rotation:15° Flips:H     | None                            | None                                     | 0.9375  | 0.8984       | Heavy augmentation                       |
+| E4     | Moderate             | Rotation:20° Flips:H     | Shift:0.2 Zoom:0.2              | None                                     | 0.8281  | 0.7656       | BatchNorm + Dropout                      |
+| E5     | Heavy(Original)      | Rotation:30° Flips:H&V   | Shift:0.2 Shear:0.2 Zoom:0.2    | Brightness:[0.8, 1.2]                    | 0.8750  | 0.8008       | Pretrained model                         |
+| E6     | Heavy1               | Rotation:45° Flips:H     | Shift:0.2 Shear:0.2 Zoom:0.2    | None                                     | 0.8906  | 0.8086       | Smaller image size                       |
+| E7     | Heavy2(Special)      | Rotation:45° Flips:H     | Shift:0.2 Shear:0.2 Zoom:0.2    | None                                     | 0.9062  | 0.8086       | Increased Depth (Testing model capacity) |
+| E8     | Heavy3(Heavy1+Heavy) | Rotation:45° Flips:H&V   | Shift:0.2 Shear:0.2 Zoom:0.2    | Brightness:[0.8, 1.2]                    | 0.8750  | 0.7773       | Heavy augmentation + Dropout             |
+| E9     | Color_Boost          | Rotation:20° Flips:H     | Shift:0.15 Zoom:0.15            | Brightness:[0.7, 1.3] Channel Shift:15.0 | 0.8594  | 0.6914       |                                          |   
+| E10    | Mixed                | Rotation:40° Flips:H&V   | Shift:0.25 Shear:0.25 Zoom:0.35 | Brightness:[0.5, 1.5] Channel Shift:35.0 |         |              | Test Accuracy: %                         |
