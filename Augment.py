@@ -8,9 +8,9 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: igno
 import random
 
 # Source train data paths
-train_dir = 'C:/Users/Jiang/Documents/GitHub/Fruit-Classifier/data/train'
+train_dir = './data/train'
 # Augmented data paths
-augmented_train_dir = 'C:/Users/Jiang/Documents/GitHub/Fruit-Classifier/data/train_augment'
+augmented_train_dir = './data/train_augment'
 
 def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224)):
     """
@@ -32,16 +32,13 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
     
     # Define data augmentation generator
     datagen = ImageDataGenerator(
-        rotation_range=40,
-        width_shift_range=0.2,
-        height_shift_range=0.2,
-        shear_range=0.2,
-        zoom_range=0.2,
-        horizontal_flip=True,
-        vertical_flip=True,
-        brightness_range=[0.5, 1.5],
-        fill_mode='nearest'
-    )
+            rotation_range=20,
+            width_shift_range=0.2,
+            height_shift_range=0.2,
+            zoom_range=0.2,
+            horizontal_flip=True,
+            fill_mode='nearest' 
+        )
     
     # Get all classes
     class_names = os.listdir(source_dir)
@@ -67,6 +64,11 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
         print(f"\nProcessing class: {class_name}")
         print(f"  Original image count: {len(image_files)}")
         
+        # Skip if no images found
+        if len(image_files) == 0:
+            print(f"  Warning: No images found in {class_name}, skipping...")
+            continue
+        
         # Copy original images to target directory (and unify size)
         copied_count = 0
         for img_file in image_files:
@@ -89,11 +91,20 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
             original_images = []
             for img_file in image_files:
                 img_path = os.path.join(class_source_dir, img_file)
-                img = Image.open(img_path)
-                img = img.convert('RGB')  # Ensure RGB format
-                img = img.resize(img_size)  # Unify size
-                img_array = np.array(img)
-                original_images.append(img_array)
+                try:
+                    img = Image.open(img_path)
+                    img = img.convert('RGB')
+                    img = img.resize(img_size)
+                    img_array = np.array(img)
+                    original_images.append(img_array)
+                except Exception as e:
+                    print(f"    Warning: Failed to load {img_file}: {e}")
+                    continue
+            
+            # Check if any images were successfully loaded
+            if len(original_images) == 0:
+                print(f"  Error: No valid images found for augmentation, skipping...")
+                continue
             
             # Convert image list to numpy array
             original_images_array = np.array(original_images)
@@ -133,7 +144,9 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
                         break
                         
                     # Convert back to image and save
-                    aug_img = Image.fromarray(batch_images[i].astype('uint8'))
+                    # 确保像素值在 0-255 范围内
+                    aug_img_array = np.clip(batch_images[i], 0, 255).astype('uint8')
+                    aug_img = Image.fromarray(aug_img_array)
                     aug_filename = f"aug_{class_name}_{generated_count:04d}.jpg"
                     aug_path = os.path.join(class_target_dir, aug_filename)
                     aug_img.save(aug_path)
