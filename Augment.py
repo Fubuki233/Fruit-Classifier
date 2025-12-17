@@ -171,4 +171,4 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
                         if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp'))])
             print(f"  {class_name}: {count} images")
 
-augment_dataset(train_dir, augmented_train_dir, target_count=80)
+augment_dataset(train_dir, augmented_train_dir, target_count=100)
