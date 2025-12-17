@@ -124,14 +124,14 @@ def augment_dataset(source_dir, target_dir, target_count=100, img_size=(224, 224
                 batch_size = min(32, len(original_images))
             
             # Set random seed for reproducibility
-            np.random.seed(42)
+            np.random.seed(21)
             
             # Create data flow
             flow_generator = datagen.flow(
                 original_images_array, 
                 batch_size=batch_size,
                 shuffle=True,
-                seed=42
+                seed=21
             )
             
             # Generate augmented images
