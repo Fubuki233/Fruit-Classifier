@@ -41,7 +41,7 @@ def get_preprocessor(method='baseline', img_size=224, batch_size=32, train_dir='
     Get data generators with different preprocessing methods
     
     Args:
-        method: 'baseline', 'light', 'heavy', 'moderate', 'minimal'
+        method: 'baseline', 'light', 'moderate', 'minimal', 'heavy', 'heavy_01', 'heavy_02', 'heavy_03', 'color_boost', 'mixed'
         img_size: image dimension (default 224)
         batch_size: batch size for training (default 32)
         train_dir: training data directory
@@ -51,7 +51,6 @@ def get_preprocessor(method='baseline', img_size=224, batch_size=32, train_dir='
     Returns:
         train_gen, val_gen, test_gen
     """
-    
     if method == 'baseline':
         train_datagen = ImageDataGenerator(rescale=1./255, validation_split=val_split)
         
@@ -62,21 +61,7 @@ def get_preprocessor(method='baseline', img_size=224, batch_size=32, train_dir='
             horizontal_flip=True,
             validation_split=val_split
         )
-        
-    elif method == 'heavy':
-        train_datagen = ImageDataGenerator(
-            rescale=1./255,
-            rotation_range=30,
-            width_shift_range=0.2,
-            height_shift_range=0.2,
-            shear_range=0.2,
-            zoom_range=0.2,
-            horizontal_flip=True,
-            vertical_flip=True,
-            brightness_range=[0.8, 1.2],
-            validation_split=val_split
-        )
-        
+       
     elif method == 'moderate':
         train_datagen = ImageDataGenerator(
             rescale=1./255,
@@ -96,9 +81,91 @@ def get_preprocessor(method='baseline', img_size=224, batch_size=32, train_dir='
             validation_split=val_split
         )
 
+    elif method == 'heavy':
+        train_datagen = ImageDataGenerator(
+            rescale=1./255,
+            rotation_range=30,
+            width_shift_range=0.2,
+            height_shift_range=0.2,
+            shear_range=0.2,
+            zoom_range=0.2,
+            horizontal_flip=True,
+            vertical_flip=True,
+            brightness_range=[0.8, 1.2],
+            validation_split=val_split
+        )
+
+    elif method == 'heavy_01':
+        train_datagen = ImageDataGenerator(
+            rescale=1./255,
+            rotation_range=45,
+            width_shift_range=0.2,
+            height_shift_range=0.2,
+            shear_range=0.2,
+            zoom_range=0.2,
+            horizontal_flip=True, # no vertical flip
+            fill_mode='nearest',
+            validation_split=val_split
+        )
+
+    elif method == 'heavy_02':
+        train_datagen = ImageDataGenerator(
+            rescale=1./255,
+            rotation_range=45,
+            width_shift_range=0.2,
+            height_shift_range=0.2,
+            shear_range=0.2,
+            zoom_range=0.2,
+            horizontal_flip=True, # no vertical flip
+            fill_mode='nearest',
+            validation_split=0.2 # explicit specification of 0.2
+        )
+
+    elif method == 'heavy_03':
+        train_datagen = ImageDataGenerator(
+            rescale=1./255,
+            rotation_range=45, # max rotation
+            width_shift_range=0.2,
+            height_shift_range=0.2,
+            shear_range=0.2,
+            zoom_range=0.2,
+            horizontal_flip=True,
+            vertical_flip=True,
+            brightness_range=[0.8, 1.2], 
+            validation_split=val_split
+        )
+
+    elif method == 'color_boost':
+        train_datagen = ImageDataGenerator(
+        rescale=1./255,
+        rotation_range=20,
+        width_shift_range=0.15,
+        height_shift_range=0.15,
+        zoom_range=0.15,
+        horizontal_flip=True,
+        brightness_range=[0.7, 1.3],   # vary lighting
+        channel_shift_range=15.0,      # vary colors
+        validation_split=val_split
+    )
         
+    elif method == 'mixed':
+        train_datagen = ImageDataGenerator(
+            rescale=1./255,
+            rotation_range=40,
+            width_shift_range=0.25,
+            height_shift_range=0.25,
+            shear_range=0.25,
+            zoom_range=0.35,
+            horizontal_flip=True,
+            vertical_flip=True,
+            brightness_range=[0.5, 1.5],
+            channel_shift_range=35.0,
+            fill_mode='nearest',
+            validation_split=val_split
+        )
+
     else:
-        raise ValueError(f"Unknown method: {method}. Choose from: baseline, light, heavy, moderate, minimal")
+        raise ValueError(f"Unknown method: {method}. Choose from: baseline, light, moderate, minimal, heavy, heavy_01, heavy_02, heavy_03, color_boost, mixed")
     
     test_datagen = ImageDataGenerator(rescale=1./255)
     
@@ -128,21 +195,23 @@ def get_preprocessor(method='baseline', img_size=224, batch_size=32, train_dir='
     
     return train_gen, val_gen, test_gen
 
-
 def list_methods():
     methods = {
         'baseline': 'No augmentation, only rescaling',
         'light': 'Rotation (15°) + Horizontal flip',
-        'heavy': 'Full augmentation (rotation, shift, zoom, shear, brightness, flips)',
         'moderate': 'Balanced augmentation (rotation, shift, zoom, flip)',
         'minimal': 'Minimal augmentation (slight rotation, zoom)',
+        'heavy': 'Full augmentation (rotation, shift, zoom, shear, brightness, flips)',
+        'heavy_01': 'Modified augmentation from heavy (rotation increased to 45 deg, shift, zoom, shear, no brightness, no vertical flip)',
+        'heavy_02': 'Modified augmentation from heavy_01, but explicitly specified validation_split = 0.2' ,
+        'heavy_03': 'Modified augmentation from heavy_01 and heavy (rotation increased to 45 deg, shift, zoom, shear, brightness, flips)',
+        'color_boost': 'Moderate geometry + brightness [0.7–1.3] + channel shift',
         'mixed': 'Intensive mix: strong geo + brightness [0.5–1.5] + channel shift'
     }
     print("Available preprocessing methods:")
     for key, desc in methods.items():
         print(f"  - {key:12s}: {desc}")
     return methods
-
 
 if __name__ == "__main__":
     import sys
@@ -152,7 +221,7 @@ if __name__ == "__main__":
     output_dir = 'data/preprocess'
     os.makedirs(output_dir, exist_ok=True)
     
-    methods = ['baseline', 'light', 'moderate', 'heavy', 'minimal', 'mixed']
+    methods = ['baseline', 'light', 'moderate', 'minimal', 'heavy', 'heavy_01', 'heavy_02', 'heavy_03', 'color_boost', 'mixed']
     samples_per_method = 5
     
     for method in methods:
