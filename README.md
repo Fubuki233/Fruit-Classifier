@@ -45,8 +45,8 @@ The data `train.zip` and `test.zip` are found under the **Files/Team Project** m
 2. **Select Remote Kernel**:
    - Click kernel selector (top-right)
    - Select "Existing Jupyter Server"
-   - Enter URL: `http://ctrl.zyh111.icu:8011/`
-   - Enter password: `123456`
+   - Enter URL: ``
+   - Enter password: ``
    - Select the `TensorFlow` kernel
 3. **Verify GPU Access**:
    Run no. 0 cell in `CNN.ipynb` , you should see :
